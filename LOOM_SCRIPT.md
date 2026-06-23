@@ -38,10 +38,10 @@
 > too, so it works even on a trackpad: I'll switch to another tab and back —
 > there it is."
 
-> **To demo:** the popup shows once per session. Switch to another tab and back
-> (or fling the cursor to the top of the screen) and it appears. To trigger it
-> again while testing, open a new tab / incognito window, or run
-> `sessionStorage.clear()` in the dev console.
+> **To demo:** the popup fires on *every* exit signal (demo mode) — switch to
+> another tab and back, or fling the cursor to the top of the screen, as many
+> times as you like. (A live store would cap it to once per session so it
+> doesn't nag; that's a one-line change noted in the component.)
 
 ### 1:00 — Pain → benefits → proof (scroll down)
 

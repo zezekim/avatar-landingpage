@@ -13,29 +13,20 @@ import { useEffect, useState } from "react";
 //   2. The tab becoming hidden — switching tabs, switching apps, or minimizing
 //      (Page Visibility API). This is the robust, device-agnostic signal and is
 //      what makes the popup demo reliably: switch tabs and back, and it's there.
-const SEEN_KEY = "spx_exit_seen";
+//
+// DEMO MODE: this fires on EVERY exit signal, not once per session. A real store
+// would suppress repeats (e.g. a sessionStorage flag) so it doesn't nag — but
+// for demoing we want it to re-trigger on each tab switch.
 
 export default function ExitIntentModal() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(SEEN_KEY)) return;
-    } catch {
-      /* ignore */
-    }
-
     let armed = false;
 
     const trigger = () => {
       if (!armed) return; // ignore signals during the initial grace period
-      setOpen(true);
-      try {
-        sessionStorage.setItem(SEEN_KEY, "1");
-      } catch {
-        /* ignore */
-      }
-      cleanup();
+      setOpen(true); // re-opens on every signal; listeners stay attached
     };
 
     const onMouseOut = (e: MouseEvent) => {
@@ -48,11 +39,6 @@ export default function ExitIntentModal() {
       if (document.visibilityState === "hidden") trigger();
     };
 
-    function cleanup() {
-      document.removeEventListener("mouseout", onMouseOut);
-      document.removeEventListener("visibilitychange", onVisibility);
-    }
-
     document.addEventListener("mouseout", onMouseOut);
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -63,7 +49,8 @@ export default function ExitIntentModal() {
 
     return () => {
       clearTimeout(arm);
-      cleanup();
+      document.removeEventListener("mouseout", onMouseOut);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
