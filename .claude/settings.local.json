@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(npm -v)",
+      "WebFetch(domain:marksilverbridge.shop)",
+      "Bash(git --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git branch *)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git -c color.ui=never status -s)"
+    ]
+  }
+}
