@@ -56,6 +56,40 @@ This is the **average-order-value (AOV) lever** and the part the brief asked for
   "encrypted," and the guarantee repeat right next to the button, where last-
   second hesitation happens.
 
+## "Sellable" conversion mechanics (added on top of the base page)
+
+These are the working, demonstrable tactics a real high-converting sales page
+uses. All are live in the build:
+
+- **Evergreen countdown timer** (`components/Countdown.tsx`). Stamps a deadline
+  in `localStorage` on first visit so the urgency persists across refreshes and
+  page changes instead of obviously resetting — honest, consistent scarcity.
+  Shown in the announcement bar and the sticky bar.
+- **Value stacking + bonuses.** Before the price is revealed, the order is framed
+  as a stack of items (main book + 3 bonuses) with their individual values
+  struck through, totalling far more than the $19 ask. Anchoring the *total
+  value* high makes the price feel like a fraction of what you get.
+- **Sticky CTA bar** (`components/StickyCta.tsx`). Slides up after the hero and
+  stays docked (bottom of screen on mobile), so the buy button + countdown are
+  always one tap away on a long-scroll page. Typically one of the largest mobile
+  lifts available.
+- **Exit-intent modal** (`components/ExitIntentModal.tsx`). Fires once when a
+  desktop visitor's cursor leaves the top of the viewport (a strong "leaving"
+  signal), offering an extra $5 off. Recovers a slice of would-be bounces at no
+  cost to committed buyers. Suppressed after one view per session.
+- **Live social-proof toasts** (`components/SocialProofToasts.tsx`). Rotating
+  "X just bought…" notifications create FOMO and normalize the purchase. *Demo
+  entries are illustrative — a real store must feed these from genuine orders;
+  fabricating sales is both a trust and a consumer-protection problem.*
+- **Payment / trust badges** (`components/PaymentBadges.tsx`). Recognized card
+  marks + SSL badge sit next to each CTA to quiet last-second "is this safe?"
+  doubt at the decision point.
+- **Post-purchase one-click upsell** (`components/PostPurchaseUpsell.tsx`). On
+  the success page, the buyer is offered a third product (*Video Vault*) as a
+  one-click add. This is the **highest-converting slot in the whole funnel**:
+  the customer already paid and trusts you, and with a real saved Stripe card
+  it's a literal one-click charge with zero friction.
+
 ## Checkout (`/api/checkout` + Stripe / mock)
 
 - **Stripe-hosted checkout.** Offloading the card form to Stripe maximizes trust
@@ -64,10 +98,14 @@ This is the **average-order-value (AOV) lever** and the part the brief asked for
   end-to-end via a Stripe-look-alike page, so the demo and a fresh Vercel deploy
   are always clickable.
 
-## What I'd test next (not yet built)
+## What I'd test / build next
 
-- A true **post-purchase upsell** (a one-click upsell *after* payment, where
-  conversion is highest because no card re-entry is needed).
-- **Exit-intent** offer on the landing page.
-- A/B testing the order bump's default state, price point, and copy.
-- Real **email delivery** of the download on the success page.
+- **A/B test** the order-bump default state, price points, exit-intent discount,
+  and countdown length — every one of these is a real revenue dial.
+- Wire the social-proof toasts and countdown to **real data** (actual recent
+  orders; per-user evergreen deadlines stored server-side).
+- Real **email delivery** of the download on the success page (e.g. Resend).
+- Charge the post-purchase upsell against the **saved Stripe card**
+  (PaymentIntent `off_session`) so it's a true one-click charge, not a re-checkout.
+- A short **VSL (video sales letter)** in the hero — often the single biggest
+  lever for info-product funnels.

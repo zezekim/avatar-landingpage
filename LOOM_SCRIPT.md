@@ -25,6 +25,17 @@
 > a paid landing page every extra link is a way to leak the visitor, so the only
 > real action is 'buy.'"
 
+### 0:45 — Selling mechanics (call these out as you scroll)
+
+> "A few things working on conversion here: notice the countdown in the top bar
+> — it's evergreen, so it persists per visitor instead of fake-resetting on
+> refresh. As I scroll, a sticky buy bar follows me down the page so the offer's
+> always one tap away — that's a big lift on mobile. You'll also see little
+> 'someone just bought' toasts in the corner for social proof, and payment and
+> SSL badges next to every button to kill last-second 'is this safe' doubt. If I
+> flick my mouse up to leave, an exit-intent popup catches me with an extra $5
+> off — recovering visitors who'd otherwise bounce."
+
 ### 1:00 — Pain → benefits → proof (scroll down)
 
 > "This 'Sound familiar?' block agitates the problem before offering relief —
@@ -64,9 +75,12 @@
 
 ### 3:20 — Complete → success page (click Pay)
 
-> "And paying lands on the success page — the delivery moment, where the download
-> would be emailed. That's the full funnel: landing, pre-checkout upsell, Stripe,
-> success."
+> "And paying lands on the success page — the delivery moment. But notice this:
+> right after purchase I'm offered the Video Vault as a one-click add. This is the
+> highest-converting slot in the entire funnel — they've already paid and trust
+> us, and with a real saved card it's a literal one-click charge, no re-entry.
+> That's the full funnel: landing, pre-checkout order bump, Stripe, and a post-
+> purchase one-click upsell."
 
 ### 3:35 — Wrap (optional: show the repo / Vercel)
 

@@ -28,6 +28,18 @@ export const UPSELL_PRODUCT: Product = {
   compareAtCents: 2900,
 };
 
+// The post-purchase one-click upsell, shown on the success page AFTER payment.
+// This slot converts highest because the buyer is past the hardest step and
+// (with real Stripe) the saved card means a literal one-click add — no re-entry.
+export const POST_PURCHASE_PRODUCT: Product = {
+  id: "video-vault",
+  name: "The Lifetime Video Vault",
+  tagline:
+    "Every repair in the book, filmed over-the-shoulder in HD — pause, rewind, and follow along at the sink. Lifetime access.",
+  priceCents: 2700, // $27 one-click add-on
+  compareAtCents: 9700,
+};
+
 export function formatPrice(cents: number): string {
   return `$${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;
 }

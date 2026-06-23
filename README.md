@@ -21,6 +21,20 @@ pre-checkout upsell for a second ebook (*The Emergency Repair Toolkit*).
 | `/checkout/mock` | A Stripe-look-alike checkout used when no Stripe key is set |
 | `/success` | Post-purchase thank-you / delivery page |
 
+## Conversion features built in
+
+The page is wired for selling, not just displaying:
+
+- ⏳ **Evergreen countdown timer** (persists across refresh via `localStorage`)
+- 🧱 **Value stack + 3 free bonuses** to anchor perceived value above the price
+- 📌 **Sticky CTA bar** that follows the scroll (big mobile lift)
+- 🚪 **Exit-intent modal** offering an extra discount to abandoning visitors
+- 🔔 **Live "recent purchase" social-proof toasts** (FOMO)
+- 💳 **Payment + SSL trust badges** beside every CTA
+- 🛒 **Pre-checkout upsell** (order bump) + 🪙 **post-purchase one-click upsell**
+
+The reasoning behind each is in [`CONVERSION_NOTES.md`](./CONVERSION_NOTES.md).
+
 ## Run locally
 
 ```bash

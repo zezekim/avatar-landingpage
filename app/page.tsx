@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { MAIN_PRODUCT, formatPrice } from "@/lib/products";
+import { MAIN_PRODUCT, UPSELL_PRODUCT, formatPrice } from "@/lib/products";
+import Countdown from "@/components/Countdown";
+import StickyCta from "@/components/StickyCta";
+import ExitIntentModal from "@/components/ExitIntentModal";
+import SocialProofToasts from "@/components/SocialProofToasts";
+import PaymentBadges from "@/components/PaymentBadges";
 
 // ---------------------------------------------------------------------------
 // Small presentational helpers (kept local so the page is self-contained).
@@ -59,13 +64,17 @@ function BookMockup() {
 export default function LandingPage() {
   return (
     <main className="overflow-x-hidden">
-      {/* Announcement bar — urgency + framing the price as a launch discount */}
+      {/* Announcement bar — urgency + live countdown framing the launch price */}
       <div className="bg-ink px-4 py-2 text-center text-sm font-medium text-white">
-        🔧 Launch week: get the Playbook for{" "}
+        🔧 Launch price ends in{" "}
+        <Countdown className="font-bold text-amber-300" /> —{" "}
         <span className="font-bold text-amber-300">
           {formatPrice(MAIN_PRODUCT.priceCents)}
         </span>{" "}
-        (normally {formatPrice(MAIN_PRODUCT.compareAtCents!)}) — instant download
+        <span className="text-white/60 line-through">
+          {formatPrice(MAIN_PRODUCT.compareAtCents!)}
+        </span>{" "}
+        · instant download
       </div>
 
       {/* Minimal header. No nav links on purpose — fewer exits = higher conversion */}
@@ -108,6 +117,7 @@ export default function LandingPage() {
           <p className="mt-4 text-sm text-slate-400">
             Instant PDF download · Works on any device · 14,000+ copies sold
           </p>
+          <PaymentBadges className="mt-4 justify-start" />
         </div>
 
         <div className="pt-6 md:pt-0">
@@ -213,6 +223,56 @@ export default function LandingPage() {
         </p>
       </section>
 
+      {/* VALUE STACK + BONUSES — inflate perceived value before the low price */}
+      <section className="mx-auto max-w-3xl px-5 py-16">
+        <h2 className="text-center text-3xl font-bold">Here&apos;s everything you get today</h2>
+        <p className="mt-2 text-center text-slate-500">
+          Plus 3 free bonuses included with your order this week:
+        </p>
+        <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 shadow-card">
+          {[
+            [MAIN_PRODUCT.name, "The complete 27-fix DIY manual with step-by-step photos", MAIN_PRODUCT.compareAtCents!],
+            [`BONUS: ${UPSELL_PRODUCT.name}`, "Stay calm and fix burst pipes & overflows under pressure", UPSELL_PRODUCT.compareAtCents!],
+            ["BONUS: Printable Shut-Off Valve Map", "Find and label every shut-off in your home before an emergency", 1900],
+            ["BONUS: 'Call a Pro or DIY?' Decision Cheatsheet", "Know in 10 seconds whether a job is safe to tackle yourself", 1500],
+          ].map(([title, desc, value]) => (
+            <div
+              key={title as string}
+              className="flex items-center justify-between gap-4 border-b border-slate-100 bg-white px-5 py-4 last:border-0"
+            >
+              <div>
+                <p className="font-semibold">{title as string}</p>
+                <p className="text-sm text-slate-500">{desc as string}</p>
+              </div>
+              <span className="shrink-0 text-sm text-slate-400 line-through">
+                {formatPrice(value as number)}
+              </span>
+            </div>
+          ))}
+          <div className="flex items-center justify-between bg-slate-50 px-5 py-4">
+            <span className="font-bold">Total value</span>
+            <span className="font-bold text-slate-400 line-through">
+              {formatPrice(
+                MAIN_PRODUCT.compareAtCents! +
+                  UPSELL_PRODUCT.compareAtCents! +
+                  1900 +
+                  1500
+              )}
+            </span>
+          </div>
+          <div className="flex items-center justify-between bg-brand-500 px-5 py-5 text-white">
+            <span className="text-lg font-black">Yours today</span>
+            <span className="text-2xl font-black">
+              {formatPrice(MAIN_PRODUCT.priceCents)}
+            </span>
+          </div>
+        </div>
+        <div className="mt-8 flex flex-col items-center">
+          <PrimaryCTA>Get it all for {formatPrice(MAIN_PRODUCT.priceCents)}</PrimaryCTA>
+          <PaymentBadges className="mt-5" />
+        </div>
+      </section>
+
       {/* GUARANTEE / RISK REVERSAL */}
       <section className="bg-slate-50 py-16">
         <div className="mx-auto max-w-2xl px-5 text-center">
@@ -276,10 +336,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-400">
+      <footer className="border-t border-slate-200 py-8 pb-28 text-center text-sm text-slate-400">
         <p>© {new Date().getFullYear()} SilverbridgeDIY · This is a demo template landing page.</p>
         <p className="mt-1">Not affiliated with any real plumbing service.</p>
       </footer>
+
+      {/* Global conversion widgets (client-side) */}
+      <StickyCta />
+      <ExitIntentModal />
+      <SocialProofToasts />
     </main>
   );
 }

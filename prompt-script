@@ -1,0 +1,53 @@
+0:00 — Intro (webcam)
+
+▎ "Hey — in this one I'm going to walk through the actual prompt that generates these scripts, and explain why it's written the way it is. The app is just a pretty front-end. This is the real engine. So let me open it up."
+
+0:15 — The job statement at the top
+
+▎ [Screen: top of the prompt — the "You are a scriptwriter…" line]
+▎
+▎ "It starts by giving the model one job and one identity. It's a scriptwriter for a channel where 'a tradition-keeper reveals lost knowledge that industry buried for profit.' That one sentence is doing a lot — it sets the genre, the narrator type, and the villain framing all at once. And right after, I tell it to write the spoken script only — no headers, no stage directions, no markdown. That matters, because by default the model wants to give you a formatted outline. We want one person talking to camera."
+
+0:50 — The variables
+
+▎ [Screen: the FILL THESE IN block]
+▎
+▎ "Then there's this fill-in section. These eight variables are the only things that change per episode — persona, name, lineage, topic, the cheap fix, the villain, the next-video teaser, and the catchphrase. Everything below this point is fixed. That's the whole design philosophy: lock the structure, vary the topic. That's how you get consistency across a hundred videos instead of re-inventing the voice every time."
+
+1:20 — The 16 beats: the core
+
+▎ [Screen: scroll into the numbered beats]
+▎
+▎ "Here's the heart of it — 16 beats, in a fixed order. This isn't a vibe, it's a sequence, and the order is the product. Let me hit the important ones."
+▎
+▎ [Highlight beat 1]
+▎
+▎ "Beat one — the cold open. It puts you, the viewer, into your own discomfort in present tense, with a running clock and at least three hard numbers. That's retention engineering. You win or lose a YouTube viewer in the first fifteen seconds, and '142 degrees, it's 2 p.m., you set it to 68' grabs harder than any intro."
+▎
+▎ [Highlight beat 2]
+▎
+▎ "Beat two — authority comes from tradition, not credentials. 'I've never paid an electric bill, not once.' The audience for this content distrusts experts — that's the whole premise — so credibility has to come from lineage and self-reliance instead of a degree."
+
+2:15 — Beat 8, the credibility hinge
+
+▎ [Screen: highlight beat 8 — THE MONEY TRAIL]
+▎
+▎ "This is the one I want you to really notice. Beat eight is where you name who profits. And the instruction explicitly tells the model to deny a grand conspiracy — 'there was no meeting' — and replace it with something quieter: everyone who profits just tacitly agrees not to mention it. That's the single most important line in the whole prompt. The moment you claim a secret cabal, you lose the smart half of your audience. 'Nobody's hiding it, they're just all quietly not telling you' is both believable and impossible to disprove. That restraint is what makes the format work."
+
+3:00 — The style rules
+
+▎ [Screen: scroll to VOICE & STYLE RULES]
+▎
+▎ "Below the beats are the style rules that apply everywhere. The big one is 'specificity is the whole product' — always pick an exact number, year, or name over a vague one, because specifics read as testimony and vague claims read as opinion. There's 'mind-read the viewer's next thought, then answer it.' There's the two-step where you name the real scientific mechanism for authority, then immediately translate it back to plain folk language for warmth. And 'anti-helplessness' — every section has to end in something cheap the viewer can actually do, because the emotion we're selling is empowerment, not despair."
+
+3:50 — The guardrail
+
+▎ [Screen: scroll to ACCURACY GUARDRAIL]
+▎
+▎ "And the last piece — the accuracy guardrail. I told the model to keep the actual mechanisms physically true and safe, and to soften a claim rather than fabricate fake studies or fake experts. Two reasons. One, this content tells real people to climb into attics and cut things — false advice is a liability. Two, these channels get torn apart in the comments when a claim is wrong. The drama lives in the framing — the villain, the grievance, the hidden knowledge — not in fake physics. Keeping the science honest actually makes the channel harder to debunk."
+
+4:25 — Wrap
+
+▎ [Screen: scroll back to top]
+▎
+▎ "So that's the prompt. A fixed identity, eight swappable variables, 16 ordered beats, a set of voice rules, and a guardrail. The whole thing is engineered so the parts that make this format addictive happen automatically, and all you supply is the topic. That's it — thanks for watching."

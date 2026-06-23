@@ -22,3 +22,8 @@ body {
 .cta-pulse:hover {
   animation: soft-pulse 1.4s ease-in-out infinite;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
