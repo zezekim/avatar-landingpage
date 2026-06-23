@@ -11,7 +11,13 @@
       "Bash(git add *)",
       "Bash(git commit -q -m ' *)",
       "Bash(git remote *)",
-      "Bash(git -c color.ui=never status -s)"
+      "Bash(git -c color.ui=never status -s)",
+      "Bash(git push *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(npm view *)",
+      "Bash(npm ls *)",
+      "Bash(npm audit *)",
+      "Bash(echo \"pushed: $?\")"
     ]
   }
 }
