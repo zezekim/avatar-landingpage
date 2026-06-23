@@ -3,10 +3,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// Exit-intent recovery: when a desktop visitor moves the cursor up toward the
-// browser chrome (a strong "about to leave" signal), we surface a one-time
-// incentive. This recaptures a slice of visitors who would otherwise bounce
-// with zero cost to the ones who were always going to buy.
+// Exit-intent recovery: surface a one-time incentive the moment a visitor
+// signals they're leaving, recapturing a slice of would-be bounces at no cost
+// to committed buyers.
+//
+// We listen for TWO leave signals, because mouse-to-top alone is unreliable
+// (it misses trackpad/touch users and fires erratically over child elements):
+//   1. Cursor exiting through the top of the viewport (classic desktop signal).
+//   2. The tab becoming hidden — switching tabs, switching apps, or minimizing
+//      (Page Visibility API). This is the robust, device-agnostic signal and is
+//      what makes the popup demo reliably: switch tabs and back, and it's there.
 const SEEN_KEY = "spx_exit_seen";
 
 export default function ExitIntentModal() {
@@ -19,27 +25,45 @@ export default function ExitIntentModal() {
       /* ignore */
     }
 
-    const onLeave = (e: MouseEvent) => {
-      // Only trigger when the mouse exits through the TOP of the viewport.
-      if (e.clientY <= 0) {
-        setOpen(true);
-        try {
-          sessionStorage.setItem(SEEN_KEY, "1");
-        } catch {
-          /* ignore */
-        }
-        document.removeEventListener("mouseout", onLeave);
+    let armed = false;
+
+    const trigger = () => {
+      if (!armed) return; // ignore signals during the initial grace period
+      setOpen(true);
+      try {
+        sessionStorage.setItem(SEEN_KEY, "1");
+      } catch {
+        /* ignore */
       }
+      cleanup();
     };
 
-    // Give the visitor a moment before arming, so it never fires on load.
+    const onMouseOut = (e: MouseEvent) => {
+      // Fire only when the pointer actually leaves the window through the top,
+      // not when it merely crosses between child elements (relatedTarget set).
+      if (e.clientY <= 0 && !e.relatedTarget) trigger();
+    };
+
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") trigger();
+    };
+
+    function cleanup() {
+      document.removeEventListener("mouseout", onMouseOut);
+      document.removeEventListener("visibilitychange", onVisibility);
+    }
+
+    document.addEventListener("mouseout", onMouseOut);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    // Short grace period so it never fires on initial load.
     const arm = setTimeout(() => {
-      document.addEventListener("mouseout", onLeave);
-    }, 4000);
+      armed = true;
+    }, 1500);
 
     return () => {
       clearTimeout(arm);
-      document.removeEventListener("mouseout", onLeave);
+      cleanup();
     };
   }, []);
 

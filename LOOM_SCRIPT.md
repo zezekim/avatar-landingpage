@@ -34,7 +34,14 @@
 > 'someone just bought' toasts in the corner for social proof, and payment and
 > SSL badges next to every button to kill last-second 'is this safe' doubt. If I
 > flick my mouse up to leave, an exit-intent popup catches me with an extra $5
-> off — recovering visitors who'd otherwise bounce."
+> off — recovering visitors who'd otherwise bounce. It triggers on tab-switch
+> too, so it works even on a trackpad: I'll switch to another tab and back —
+> there it is."
+
+> **To demo:** the popup shows once per session. Switch to another tab and back
+> (or fling the cursor to the top of the screen) and it appears. To trigger it
+> again while testing, open a new tab / incognito window, or run
+> `sessionStorage.clear()` in the dev console.
 
 ### 1:00 — Pain → benefits → proof (scroll down)
 
